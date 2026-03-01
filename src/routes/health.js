@@ -24,9 +24,9 @@ router.get('/', async (req, res) => {
                 startedAt: p.startedAt,
             })),
             env: {
-                programId: process.env.PROGRAM_ID || '(not set)',
-                rpc: process.env.SOLANA_RPC_URL ? '(configured)' : 'public (rate limited)',
-                dbType: process.env.DB_TYPE || 'sqlite',
+                programId: 'CPMWvEXzNTnrksm1PPXQzp2UUTXWxCKQaw9HhvDdf3nT',
+                rpc: 'https://mainnet.helius-rpc.com/?api-key=6c7bdee8-475b-4fec-8897-91f7c3324425'.slice(0, 30) + '...',
+                dbType: 'postgres',
             },
         });
     } catch (err) {

@@ -12,17 +12,17 @@
  * PostgreSQL uses async pg — all methods return Promises either way.
  */
 
-require('dotenv').config();
+
 const path = require('path');
 const fs = require('fs');
 const logger = require('../logger');
 
-const DB_TYPE = (process.env.DB_TYPE || 'sqlite').toLowerCase();
+const DB_TYPE = 'postgres';
 
 // ─── SQLite adapter ────────────────────────────────────────────────────────────
 function buildSQLiteDb() {
     const Database = require('better-sqlite3');
-    const dbPath = path.resolve(process.env.SQLITE_PATH || './data/indexer.db');
+    const dbPath = path.resolve('./data/indexer.db');
 
     // Ensure directory exists
     fs.mkdirSync(path.dirname(dbPath), { recursive: true });
@@ -61,15 +61,9 @@ function buildSQLiteDb() {
 // ─── PostgreSQL adapter ────────────────────────────────────────────────────────
 function buildPgDb() {
     const { Pool } = require('pg');
-    const pool = new Pool(process.env.SUPABASE_CONNECTION_URL ? {
-        connectionString: process.env.SUPABASE_CONNECTION_URL,
-        ssl: { rejectUnauthorized: false } // Supabase requires SSL usually, but rejectUnauthorized: false is common for dev/simplicity
-    } : {
-        host: process.env.PG_HOST || 'localhost',
-        port: parseInt(process.env.PG_PORT || '5432'),
-        database: process.env.PG_DATABASE || 'bonding_indexer',
-        user: process.env.PG_USER || 'postgres',
-        password: process.env.PG_PASSWORD || '',
+    const pool = new Pool({
+        connectionString: "postgresql://postgres.wpeskagtzelgzgwdcchl:8m9TiYZ52N9AlrjY@aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres",
+        ssl: { rejectUnauthorized: false }
     });
 
     // Adapter converts SQLite-style ? placeholders to $1 $2 … for PG,

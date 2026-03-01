@@ -11,9 +11,7 @@
 
 const logger = require('../logger');
 
-const PANEL_API_URL =
-    process.env.PANEL_API_URL ||
-    'https://panel.noottools.io/items/projects?sort=-date_created';
+const PANEL_API_URL = 'https://panel.noottools.io/items/projects?sort=-date_created';
 
 /**
  * Fetch mints from the Noottools panel and normalise to {label, tokenMint}.

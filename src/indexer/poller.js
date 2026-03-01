@@ -9,7 +9,7 @@
  *   mgr.list();             // active mints
  */
 
-require('dotenv').config();
+
 const { Connection, PublicKey } = require('@solana/web3.js');
 const db = require('../db');
 const logger = require('../logger');
@@ -25,12 +25,12 @@ const { upsertCandlesForTrade } = require('../services/candleService');
 const { emitCandle, emitPrice } = require('../services/broadcaster');
 const { RESOLUTIONS } = require('../services/candleService');
 
-const RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
-const PROGRAM_ID = process.env.PROGRAM_ID;
-const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS || '5000', 10);
-const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || '10', 10);
-const MAX_SIGNATURES = parseInt(process.env.MAX_SIGNATURES || '1000', 10);
-const INTER_BATCH_DELAY = parseInt(process.env.INTER_BATCH_DELAY_MS || '300', 10);
+const RPC_URL = 'https://mainnet.helius-rpc.com/?api-key=6c7bdee8-475b-4fec-8897-91f7c3324425';
+const PROGRAM_ID = 'CPMWvEXzNTnrksm1PPXQzp2UUTXWxCKQaw9HhvDdf3nT';
+const POLL_INTERVAL_MS = 15000;
+const BATCH_SIZE = 5;
+const MAX_SIGNATURES = 1000;
+const INTER_BATCH_DELAY = 500;
 
 // Shared connection — one RPC connection for all mints
 let _connection = null;

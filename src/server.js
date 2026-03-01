@@ -12,7 +12,7 @@
  *   WS     ws://host:port          → events: candle_update, price_update
  */
 
-require('dotenv').config();
+
 
 const http = require('http');
 const express = require('express');
@@ -31,7 +31,7 @@ const indexerRoute = require('./routes/indexer');
 const tradesRoute = require('./routes/trades');
 const { fetchMints } = require('./config/mints');
 
-const PORT = parseInt(process.env.INDEXER_PORT || '3001', 10);
+const PORT = 3001;
 
 // ─── Express ──────────────────────────────────────────────────────────────────
 
@@ -116,7 +116,7 @@ server.listen(PORT, () => {
     logger.info(`[server]    WS   ws://localhost:${PORT}`);
 
     // ── Auto-detect mints from the Noottools panel API (runs every MINT_SYNC_INTERVAL_MS) ──
-    const MINT_SYNC_INTERVAL_MS = parseInt(process.env.MINT_SYNC_INTERVAL_MS || '60000', 10);
+    const MINT_SYNC_INTERVAL_MS = 60000;
 
     async function syncMints() {
         let mints;
