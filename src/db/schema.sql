@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS candles (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   token_mint  TEXT    NOT NULL,
   resolution  TEXT    NOT NULL,
-  open_time   INTEGER NOT NULL,
+  open_time   BIGINT NOT NULL,
   open        REAL    NOT NULL,
   high        REAL    NOT NULL,
   low         REAL    NOT NULL,
